@@ -1,0 +1,254 @@
+{
+  "AUTH": {
+    "LOGIN_SUCCESS": {
+      "message": "User logged in successfully.",
+      "code": 2000
+    },
+    "LOGIN_FAILED": {
+      "message": "Invalid username or password.",
+      "code": 1001
+    },
+    "REGISTER_SUCCESS": {
+      "message": "Account created successfully.",
+      "code": 2001
+    },
+    "LOGOUT_SUCCESS": {
+      "message": "Logged out successfully.",
+      "code": 2002
+    },
+    "TFA_REQUIRED": {
+      "message": "Two-factor authentication is required.",
+      "code": 1002
+    },
+    "ACCOUNT_LOCKED": {
+      "message": "Your account has been locked. Please contact support.",
+      "code": 1003
+    },
+    "ACCOUNT_SUSPENDED": {
+      "message": "Your account has been suspended. Please contact support.",
+      "code": 1004
+    },
+    "ACCOUNT_DELETED": {
+      "message": "Account deleted successfully.",
+      "code": 2003
+    },
+    "ACCOUNT_NOT_FOUND": {
+      "message": "Account not found.",
+      "code": 1005
+    }
+  },
+  "TOKEN": {
+    "ACCESS_TOKEN_REFRESHED": {
+      "message": "Access token refreshed.",
+      "code": 2004
+    },
+    "INVALID_TOKEN": {
+      "message": "Invalid or expired token.",
+      "code": 1006
+    },
+    "TOKEN_EXPIRED": {
+      "message": "Token expired.",
+      "code": 1007
+    },
+    "RESET_TOKEN_EXPIRED": {
+      "message": "Password reset token has expired.",
+      "code": 1008
+    },
+    "INVALID_RESET_TOKEN": {
+      "message": "Invalid password reset token.",
+      "code": 1009
+    }
+  },
+  "USER": {
+    "PROFILE_FETCH_SUCCESS": {
+      "message": "Profile fetched successfully.",
+      "code": 2005
+    },
+    "PROFILE_UPDATE_SUCCESS": {
+      "message": "Profile updated successfully.",
+      "code": 2006
+    },
+    "EMAIL_VERIFIED": {
+      "message": "Email verified successfully.",
+      "code": 2007
+    },
+    "EMAIL_ALREADY_VERIFIED": {
+      "message": "Email is already verified.",
+      "code": 2008
+    },
+    "EMAIL_ALREADY_IN_USE": {
+      "message": "Email address is already in use.",
+      "code": 1010
+    },
+    "USERNAME_ALREADY_IN_USE": {
+      "message": "Username is already in use.",
+      "code": 1011
+    }
+  },
+  "PASSWORD": {
+    "PASSWORD_RESET_REQUESTED": {
+      "message": "Password reset request sent. Check your email for instructions.",
+      "code": 2009
+    },
+    "PASSWORD_RESET_SUCCESSFUL": {
+      "message": "Password reset successful.",
+      "code": 2010
+    },
+    "PASSWORD_RESET_FAILED": {
+      "message": "Password reset failed. Please try again.",
+      "code": 1012
+    },
+    "INCORRECT_OLD_PASSWORD": {
+      "message": "Old password is incorrect.",
+      "code": 1013
+    },
+    "RESET_LINK_SENT": {
+      "message": "Password reset link sent to email.",
+      "code": 2011
+    },
+    "RESET_SUCCESS": {
+      "message": "Password reset successfully.",
+      "code": 2012
+    },
+    "RESET_FAILED": {
+      "message": "Password reset failed.",
+      "code": 1014
+    }
+  },
+  "VALIDATION": {
+    "FAILED": {
+      "message": "Validation failed. Check input fields.",
+      "code": 2000
+    },
+    "ZOD_VALIDATION_FAILED": {
+      "message": "Zod schema validation failed.",
+      "code": 2001
+    },
+    "MONGO_VALIDATION_FAILED": {
+      "message": "MongoDB validation failed.",
+      "code": 2002
+    },
+    "INVALID_CREDENTIALS": {
+      "message": "Invalid credentials.",
+      "code": 400
+    }
+  },
+  "SESSION": {
+    "SESSION_ADDED": {
+      "message": "New session recorded.",
+      "code": 2013
+    },
+    "SESSION_UPDATED": {
+      "message": "Session updated.",
+      "code": 2014
+    },
+    "SESSION_EXPIRED": {
+      "message": "Session expired. Please login again.",
+      "code": 1015
+    }
+  },
+  "THROTTLING": {
+    "TOO_MANY_LOGIN_ATTEMPTS": {
+      "message": "Too many login attempts. Account temporarily locked.",
+      "code": 1016
+    },
+    "RATE_LIMIT_EXCEEDED": {
+      "message": "Rate limit exceeded. Try again later.",
+      "code": 1017
+    }
+  },
+  "ADMIN": {
+    "ACCESS_GRANTED": {
+      "message": "Admin access granted.",
+      "code": 2015
+    },
+    "USER_BANNED": {
+      "message": "User has been banned.",
+      "code": 2016
+    },
+    "USER_UNBANNED": {
+      "message": "User has been unbanned.",
+      "code": 2017
+    }
+  },
+  "FILE": {
+    "UPLOAD_SUCCESS": {
+      "message": "File uploaded successfully.",
+      "code": 2018
+    },
+    "UPLOAD_FAILED": {
+      "message": "File upload failed.",
+      "code": 5001
+    },
+    "UNSUPPORTED_FILE_TYPE": {
+      "message": "Unsupported file type.",
+      "code": 5002
+    }
+  },
+  "DATABASE": {
+    "DUPLICATE_KEY": {
+      "message": "Duplicate field value.",
+      "code": 3001
+    },
+    "NOT_FOUND": {
+      "message": "Record not found in the database.",
+      "code": 3002
+    },
+    "DB_ERROR": {
+      "message": "A database error occurred.",
+      "code": 3003
+    },
+    "VALIDATION_FAILED": {
+      "message": "Database validation failed.",
+      "code": 3004
+    }
+  },
+  "REDIS": {
+    "KEY_NOT_FOUND": {
+      "message": "The requested data was not found in the Redis store.",
+      "code": 404
+    },
+    "VALIDATION_FAILED": {
+      "message": "Redis validation failed. The value is missing, invalid, or malformed.",
+      "code": 400
+    },
+    "CONNECTION_FAILED": {
+      "message": "Unable to connect to the Redis server. Please try again later.",
+      "code": 500
+    },
+    "WRITE_FAILED": {
+      "message": "Failed to write data to Redis. Please try again.",
+      "code": 500
+    }
+  },
+  "COMMON": {
+    "NOT_FOUND": {
+      "message": "Resource not found.",
+      "code": 404
+    },
+    "BAD_REQUEST": {
+      "message": "Bad request.",
+      "code": 400
+    },
+    "SERVER_ERROR": {
+      "message": "Something went wrong on our end.",
+      "code": 500
+    },
+    "SUCCESS": {
+      "message": "Request completed successfully.",
+      "code": 200
+    },
+    "DELETED": {
+      "message": "Deleted successfully.",
+      "code": 2019
+    },
+    "UPDATED": {
+      "message": "Updated successfully.",
+      "code": 2020
+    },
+    "CREATED": {
+      "message": "Created successfully.",
+      "code": 2021
+    }
+  }
+}
