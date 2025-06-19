@@ -14,7 +14,7 @@ export const login = typedAsyncHandler<AppHTTPRequest>(async (req: AppHTTPReques
   else if(req.body.email) payload = { ...payload, ...{email : req.body.email }};
   else throw new AppError('Invalid Data', 400);
   
-  const searchQuery = { ...{username: payload?.username , email: payload?.email} };
+  const searchQuery = { ...{username: payload.username , email: payload.email} };
   const fetchedUser =  await AuthModel.findOne({ searchQuery })
   
   // Check if the user exists

@@ -49,7 +49,6 @@ const loginHistorySchema = new Schema<ILoginHistory>(
       // Safe parsing with fallback
       expires: (() => {
         const val = process.env.LOGIN_HISTORY_EXPIRES_IN;
-        if (isNaN(val)) throw new Error("Invalid LOGIN_HISTORY_EXPIRES_IN");
         return val;
       })()
     }

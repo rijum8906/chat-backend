@@ -1,7 +1,7 @@
 // src/env.d.ts
 declare namespace NodeJS {
   interface ProcessEnv {
-    PORT: string;
+    PORT: number;
     NODE_ENV: "production" | "development";
     
     // Database
@@ -20,7 +20,6 @@ declare namespace NodeJS {
     JWT_REFRESH_SECRET: string;
     
     // Model
-    LOGIN_HISTORY_EXPIRES_IN : number;
     LOGIN_HISTORY_EXPIRES_IN: number;
   }
 }

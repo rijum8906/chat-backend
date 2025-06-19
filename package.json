@@ -5,9 +5,9 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
+    "dev": "tsup src/server.ts --watch --onSuccess \"node dist/server.cjs\"",
+    "build": "tsup src/server.ts --out-dir dist --format esm",
+    "start": "node dist/server.cjs",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist"
   },
@@ -30,10 +30,6 @@
     "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@babel/core": "^7.27.4",
-    "@babel/node": "^7.27.1",
-    "@babel/preset-env": "^7.27.2",
-    "@babel/preset-typescript": "^7.27.1",
     "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
