@@ -4,7 +4,8 @@ import jwt from 'jsonwebtoken';
 import { compareRedisKey } from '@/configs/redis.config';
 import { AppError } from '@/utils/AppError';
 import { type IUserTokenPayload } from '@/types/user';
-import responses from '@/constants/responses.json'
+import responses from '@/constants/responses.json';
+import { getEnv } from '@/configs/env.config';
 
 type DecodedToken = IUserTokenPayload;
 
@@ -14,15 +15,13 @@ interface AuthenticatedRequest extends Request {
 
 export const authenticateAccessToken = asyncHandler(
   async (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
-    const accessToken =
-      req.cookies?.accessToken ||
-      req.headers.authorization?.replace('Bearer ', '');
+    const accessToken = req.cookies?.accessToken || req.headers.authorization?.replace('Bearer ', '');
 
     if (!accessToken) {
       throw new AppError('Token is not provided', 401);
     }
 
-    const secretKey = process.env.JWT_SECRET;
+    const secretKey = getEnv("JWT_SECRET");
     if (!secretKey) {
       throw new AppError('JWT secret key is not defined', 500);
     }

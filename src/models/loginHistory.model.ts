@@ -1,4 +1,5 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
+import { getEnvNumber } from '@/configs/env.config';
 
 // ===========================
 // Interface for LoginHistory
@@ -48,7 +49,7 @@ const loginHistorySchema = new Schema<ILoginHistory>(
       default: Date.now,
       // Safe parsing with fallback
       expires: (() => {
-        const val = process.env.LOGIN_HISTORY_EXPIRES_IN;
+        const val = getEnvNumber("LOGIN_HISTORY_EXPIRES_IN");
         return val;
       })()
     }

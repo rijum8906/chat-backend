@@ -1,7 +1,8 @@
-import { IUserDBInfo } from "@/types/user";
-import { IUser } from "@/types/user";
-import jwt, { type Secret } from "jsonwebtoken";
-import { AppError } from "./AppError";
+import { IUserDBInfo } from '@/types/user';
+import { IUser } from '@/types/user';
+import jwt, { type Secret } from 'jsonwebtoken';
+import { AppError } from './AppError';
+import { getEnv, getEnvNumber } from '@/configs/env.config';
 
 export interface IFormattedUser {
   user: IUser;
@@ -13,11 +14,11 @@ export const formatUserData = (user: IUserDBInfo): IFormattedUser => {
   const accessTokenPayload = {
     sub: user._id,
     roles: user.roles
-  }
+  };
 
   const refreshTokenPayload = {
     sub: user._id.toString()
-  }
+  };
 
   return {
     user: {
@@ -32,10 +33,10 @@ export const formatUserData = (user: IUserDBInfo): IFormattedUser => {
     accessToken: generateToken({ payload: accessTokenPayload }),
     refreshToken: generateToken({
       payload: refreshTokenPayload,
-      expiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
-      secretKey: process.env.JWT_REFRESH_SECRET
+      expiresIn: getEnvNumber("JWT_REFRESH_EXPIRES_IN"),
+      secretKey: getEnv("JWT_REFRESH_SECRET")
     })
-  }
+  };
 };
 
 export const generateToken = ({
@@ -47,11 +48,11 @@ export const generateToken = ({
   secretKey?: Secret;
   expiresIn?: number;
 }) => {
-  const secret = secretKey || process.env.JWT_SECRET;
-  if (!secret) throw new AppError("JWT_SECRET is not defined", 500);
+  const secret = secretKey || getEnv("JWT_SECRET");
+  if (!secret) throw new AppError('JWT_SECRET is not defined', 500);
 
   return jwt.sign(payload, secret, {
-    expiresIn: expiresIn || process.env.JWT_EXPIRES_IN || "1h",
-    algorithm: "HS256"
+    expiresIn: expiresIn || getEnvNumber("JWTEXPIRES_IN"),
+    algorithm: 'HS256'
   });
 };

@@ -19,28 +19,28 @@ This is a production-ready, scalable **chat backend** built using TypeScript, Ex
 
 ## 📦 Tech Stack
 
-| Layer              | Technology              |
-|--------------------|--------------------------|
-| Language           | TypeScript               |
-| Web Framework      | Express 5                |
-| Real-time          | Socket.IO                |
-| Database           | MongoDB + Mongoose       |
-| Cache              | Redis + ioredis          |
-| Auth               | JWT + Cookies            |
-| Validation         | Zod                      |
-| Build Tool         | tsup (powered by esbuild)|
+| Layer         | Technology                |
+| ------------- | ------------------------- |
+| Language      | TypeScript                |
+| Web Framework | Express 5                 |
+| Real-time     | Socket.IO                 |
+| Database      | MongoDB + Mongoose        |
+| Cache         | Redis + ioredis           |
+| Auth          | JWT + Cookies             |
+| Validation    | Zod                       |
+| Build Tool    | tsup (powered by esbuild) |
 
 ---
 
 ## 🛠️ Scripts
 
-| Command              | Description                      |
-|----------------------|----------------------------------|
-| `npm run dev`        | Start dev server with auto-reload |
-| `npm run build`      | Build project using `tsup`        |
+| Command              | Description                          |
+| -------------------- | ------------------------------------ |
+| `npm run dev`        | Start dev server with auto-reload    |
+| `npm run build`      | Build project using `tsup`           |
 | `npm run start`      | Start compiled server (from `dist/`) |
-| `npm run type-check` | Run type checks using `tsc`       |
-| `npm run clean`      | Delete `dist/` output             |
+| `npm run type-check` | Run type checks using `tsc`          |
+| `npm run clean`      | Delete `dist/` output                |
 
 ---
 

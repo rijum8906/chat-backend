@@ -33,19 +33,17 @@ export class AppError extends Error {
   static fromMongoError(error: any) {
     if (error.code === 11000) {
       const { message, code } = responses.DATABASE.DUPLICATE_KEY;
-      return new AppError(message, code , {
+      return new AppError(message, code, {
         errors: error.keyValue
       });
-    }
-
-    else if (error instanceof MongooseError.ValidationError) {
+    } else if (error instanceof MongooseError.ValidationError) {
       const { message, code } = responses.DATABASE.VALIDATION_FAILED;
       const formattedErrors: Record<string, string> = {};
       for (const key in error.errors) {
         formattedErrors[key] = error.errors[key].message;
       }
 
-      return new AppError(message, code , {
+      return new AppError(message, code, {
         errors: formattedErrors
       });
     }

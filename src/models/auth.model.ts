@@ -19,11 +19,16 @@ interface ILastLogin {
 
 interface ISession {
   token: string;
-  ipAddress?: string;
-  userAgent?: string;
-  deviceId?: string;
-  createdAt: Date;
-  lastUsed: Date;
+  ipAddress: string;
+  userAgent: string;
+  deviceId: string;
+  createdAt?: Date;
+  lastUsed?: Date;
+}
+
+interface ISessionQuery {
+  key: "token" | "ipAddress" | "userAgent" | "deviceId";
+  value: string;
 }
 
 interface IFailedLoginAttempt {
@@ -36,20 +41,18 @@ export interface IUserAuthMethods {
   comparePassword(candidatePassword: string): Promise<boolean>;
   createPasswordResetToken(): string;
   addSession(sessionInfo: ISession): void;
-  incrementLoginAttempts(deviceInfo: {
-    ipAddress?: string;
-    userAgent?: string;
-  }): void;
+  removeSession(sessionQ: ISessionQuery): void;
+  incrementLoginAttempts(deviceInfo: { ipAddress?: string; userAgent?: string }): void;
 }
 
-type Role = "user" | "admin";
+export type Role = 'user' | 'admin';
 
 export interface IUserAuth extends Document, IUserAuthMethods {
   // Core Auth Fields
   email: string;
   password?: string;
   username: string;
-  roles: Role[]
+  roles: Role[];
 
   // Account Security
   passwordChangedAt?: Date;
@@ -107,10 +110,7 @@ const userAuthSchema: Schema = new Schema(
       type: String,
       required: [true, 'Username is required'],
       trim: true,
-      match: [
-        /^[a-z0-9_]+$/,
-        'Username must be lowercase alphanumeric + underscores'
-      ],
+      match: [/^[a-z0-9_]+$/, 'Username must be lowercase alphanumeric + underscores'],
       minlength: 3,
       maxlength: 30
     },
@@ -235,10 +235,7 @@ userAuthSchema.pre<IUserAuth>('save', async function (next) {
 });
 
 // --- Password Comparison ---
-userAuthSchema.methods.comparePassword = async function (
-  this: IUserAuth,
-  candidatePassword: string
-): Promise<boolean> {
+userAuthSchema.methods.comparePassword = async function (this: IUserAuth, candidatePassword: string): Promise<boolean> {
   if (this.password) {
     return await bcrypt.compare(candidatePassword, this.password);
   }
@@ -246,28 +243,18 @@ userAuthSchema.methods.comparePassword = async function (
 };
 
 // --- Password Reset Token ---
-userAuthSchema.methods.createPasswordResetToken = function (
-  this: IUserAuth
-): string {
+userAuthSchema.methods.createPasswordResetToken = function (this: IUserAuth): string {
   const resetToken = crypto.randomBytes(32).toString('hex');
-  this.passwordResetToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex');
+  this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
   this.passwordResetTokenExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
   return resetToken;
 };
 
 // --- Add/Update Sessions on Login ---
-userAuthSchema.methods.addSession = function (
-  this: IUserAuth,
-  sessionInfo: ISession
-): void {
+userAuthSchema.methods.addSession = function (this: IUserAuth, sessionInfo: ISession): void {
   // Find existing session for this device
-  const existingSessionIndex = this.activeSessions.findIndex(
-    (session) => session.deviceId === sessionInfo.deviceId
-  );
+  const existingSessionIndex = this.activeSessions.findIndex((session) => session.deviceId === sessionInfo.deviceId);
 
   if (existingSessionIndex >= 0) {
     // Update existing session
@@ -277,6 +264,10 @@ userAuthSchema.methods.addSession = function (
     this.activeSessions.push(sessionInfo);
   }
 };
+
+userAuthSchema.methods.removeSessiom = function (this: IUserAuth, sessionQ: ISessionQuery): void {
+  this.activeSessions.splice(this.activeSessions.findIndex(sess=> sess[sessionQ.key] === sessionQ.value));
+}
 
 // --- Account Locking for Brute Force ---
 userAuthSchema.methods.incrementLoginAttempts = function (

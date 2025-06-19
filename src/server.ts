@@ -1,6 +1,6 @@
 import { app } from '@/app';
 import appRouter from '@/routes/v1/routes';
-import { globalErrorHandler } from '@/middlewares/errorHandler'; 
+import { globalErrorHandler } from '@/middlewares/errorHandler';
 
 app.use('/api/v1', appRouter);
 
